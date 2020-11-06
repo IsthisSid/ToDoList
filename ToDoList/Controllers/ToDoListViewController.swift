@@ -19,6 +19,8 @@ class ToDoListViewController: UITableViewController {
     //data persistance using UserDefaults:
     //let defaults = UserDefaults.standard // commenting out because we are using Items.plist instead
     
+    //appdelegate is a class it is not an object so how do we do this? we need to get the object of appdelegate. Use Singleton. Tap into UIApplication.shared and this is a singleton APP instance. In this shared UIApplication object there is something called delegate and this is the delegate object of the APPdelegate -- downcast using as! and now we have access to our appdelegate as an object:
+    let context = (UIApplication.shared.delegate as! Delegate).perstentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,7 +117,9 @@ class ToDoListViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             //what will happen once the user clicks the add item button on our UIalert
             
-            let newItem = Item()
+ 
+            
+            let newItem = Item(context: context)
             newItem.title = textField.text!
             
             //because we are inside a closure, the 'in' keyword, we have to specify self to tell the compiler explicitly where this itemarray exists in the current class:
@@ -145,13 +149,10 @@ class ToDoListViewController: UITableViewController {
  //Mark - Model Manipulation Methods
     
     func saveItems() {
-        //don't use userdefaults for big pieces of data, we have better tools, such as NSCoder. Print filepath, go to that plist we created and we can see that our Encoder has encoded our properties into a dictionary and the individual properties still conform to all the basic datatypes:
-        let encoder = PropertyListEncoder()
+      
         do {
-            let data = try encoder.encode(itemArray)
-            try data.write(to: dataFilePath!)
+        
         } catch {
-            print("Error encoding item array, \(error)")
         }
         
         
