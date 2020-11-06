@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ToDoListViewController: UITableViewController {
 //remember to change the superclass to UITableViewController since that is what we are using in our Main.storyboard
@@ -24,7 +25,7 @@ class ToDoListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadItems()
+//        loadItems()
 //  print(dataFilePath) // commented out for now but we would use this to retrieve the filepath on debug
 
 //remember this is a hard key so make sure it's correctly typed and that it exists in our info.plist(review sandbox)// otherwise, to prevent crash, we can just write an if let and make optional:
@@ -119,7 +120,7 @@ class ToDoListViewController: UITableViewController {
             
  
             
-            let newItem = Item(context: context)
+            let newItem = Item(context: self.context)
             newItem.title = textField.text!
             
             //because we are inside a closure, the 'in' keyword, we have to specify self to tell the compiler explicitly where this itemarray exists in the current class:
@@ -151,8 +152,9 @@ class ToDoListViewController: UITableViewController {
     func saveItems() {
       
         do {
-        
+            try context.save
         } catch {
+            print("Error saving context \(error)")
         }
         
         
@@ -164,15 +166,15 @@ class ToDoListViewController: UITableViewController {
         self.tableView.reloadData()
             }
     
-    func loadItems() {
-        if let data = try? Data(contentsOf: dataFilePath!) {
-            let decoder = PropertyListDecoder()
-            do {
-                itemArray = try decoder.decode([Item].self, from: data)
-            } catch {
-                print("Error decoding item array, \(error)")
-            }
-        }
-    }
+//    func loadItems() {
+//        if let data = try? Data(contentsOf: dataFilePath!) {
+//            let decoder = PropertyListDecoder()
+//            do {
+//                itemArray = try decoder.decode([Item].self, from: data)
+//            } catch {
+//                print("Error decoding item array, \(error)")
+//            }
+//        }
+//    }
 }
 
