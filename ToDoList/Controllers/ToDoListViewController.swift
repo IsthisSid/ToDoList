@@ -7,12 +7,16 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class ToDoListViewController: SwipeTableViewController {
     
     var toDoItems: Results<Item>?
     let realm = try! Realm()
 
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    
     //using didSet to specify what happens when a variable gets set with a new value
     var selectedCategory : Category? {
         didSet{
@@ -23,9 +27,34 @@ class ToDoListViewController: SwipeTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         //prints out the filepath to our debug to locate our SQLite file in which we open with a SQLite app. Open it to view items you added to our todolist app. This is our persistentContainer.
-   
+        
+        tableView.separatorStyle = .none
+
+    }
+    
+    //Gets called later than viewdidload right before the view is going to show up on screen.  Viewdidload -> navigation stack established -> viewwillappear -> user sees what's on screen
+    override func viewWillAppear(_ animated: Bool) {
+        if let colorHex = selectedCategory?.color {
+            
+            title = selectedCategory!.name
+            
+            guard let navBar = navigationController?.navigationBar else {fatalError("Navigation controller does not exist.")}
+            
+            if let navBarColor = UIColor(hexString: colorHex) {
+                
+                navBar.backgroundColor = navBarColor
+                
+                navBar.tintColor = ContrastColorOf(navBarColor, returnFlat: true)
+                
+                navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : ContrastColorOf(navBarColor, returnFlat: true)]
+                
+                searchBar.backgroundColor = navBarColor
+                
+            }
+        
+        }
     }
 
 //MARK: - Tableview Datasource Methods
@@ -43,6 +72,12 @@ class ToDoListViewController: SwipeTableViewController {
         
         if let item = toDoItems?[indexPath.row] {
             cell.textLabel?.text = item.title
+            
+            if let color = UIColor(hexString: selectedCategory!.color)?.darken(byPercentage:CGFloat(indexPath.row) / CGFloat(toDoItems!.count)) {
+                cell.backgroundColor = color
+                cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
+            }
+
             
             cell.accessoryType = item.done ? .checkmark : .none
         } else {

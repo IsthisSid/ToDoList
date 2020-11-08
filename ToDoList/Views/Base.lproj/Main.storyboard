@@ -32,7 +32,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="ToDo" id="sG9-Cf-583">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="SaW-sU-Db8">
-                            <color key="tintColor" systemColor="systemRedColor"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="gcy-8H-7WT" id="IcN-6z-SHD"/>
                             </connections>
@@ -79,12 +78,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Items" id="nMb-ev-xPG">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="cUj-eh-4T3">
-                            <color key="tintColor" systemColor="systemRedColor"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="Nc4-pY-swg" id="Fpb-4L-eGj"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="IO5-Bj-zsD" id="xyB-LG-fS3"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j2q-bA-grh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -95,10 +96,11 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lcq-YE-f5d" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EwW-do-Lo1">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="EwW-do-Lo1">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.37915620799999999" green="1" blue="0.69462201339999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.0" green="0.45882352941176469" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.37647058823529411" green="1" blue="0.69411764705882351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" systemColor="systemBlueColor"/>
                         </textAttributes>
@@ -119,9 +121,6 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
