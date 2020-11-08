@@ -17,6 +17,7 @@
 		FF4CEF602556C03700C598AA /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4CEF5F2556C03700C598AA /* CategoryTableViewController.swift */; };
 		FF4CEF722556F63D00C598AA /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4CEF712556F63D00C598AA /* Item.swift */; };
 		FF4CEF752556F64B00C598AA /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4CEF742556F64B00C598AA /* Category.swift */; };
+		FF4CEF7F2558218200C598AA /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4CEF7E2558218200C598AA /* SwipeTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		FF4CEF5F2556C03700C598AA /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		FF4CEF712556F63D00C598AA /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FF4CEF742556F64B00C598AA /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		FF4CEF7E2558218200C598AA /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				FF4CEF5F2556C03700C598AA /* CategoryTableViewController.swift */,
 				FF4CEF1125535BBF00C598AA /* ToDoListViewController.swift */,
+				FF4CEF7E2558218200C598AA /* SwipeTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				FF4CEF1225535BBF00C598AA /* ToDoListViewController.swift in Sources */,
 				FF4CEF602556C03700C598AA /* CategoryTableViewController.swift in Sources */,
 				FF4CEF0E25535BBF00C598AA /* AppDelegate.swift in Sources */,
+				FF4CEF7F2558218200C598AA /* SwipeTableViewController.swift in Sources */,
 				FF4CEF722556F63D00C598AA /* Item.swift in Sources */,
 				FF4CEF1025535BBF00C598AA /* SceneDelegate.swift in Sources */,
 				FF4CEF752556F64B00C598AA /* Category.swift in Sources */,

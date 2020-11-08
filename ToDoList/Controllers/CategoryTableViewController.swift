@@ -6,10 +6,9 @@
 //
 
 import UIKit
-import CoreData
 import RealmSwift
 
-class CategoryTableViewController: UITableViewController {
+class CategoryTableViewController: SwipeTableViewController {
     //initialize a new access point to our realm database
     let realm = try! Realm()
     //collectiontype Results of Category Object optional so we can be safe
@@ -20,7 +19,7 @@ class CategoryTableViewController: UITableViewController {
         super.viewDidLoad()
         
         loadCategories()
-
+        
     }
 //MARK: - Tableview Datasource Methods
     
@@ -29,11 +28,15 @@ class CategoryTableViewController: UITableViewController {
         return categories?.count ?? 1
     }
     
+
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+        
+        //go into our super class:
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         cell.textLabel?.text = categories?[indexPath.row].name ?? "No Categories Added Yet"
-        
+         
         return cell
     }
     
@@ -71,18 +74,25 @@ class CategoryTableViewController: UITableViewController {
     func loadCategories() {
         
          categories = realm.objects(Category.self)
-//this single line of code replaces all the lines below
-//        let request : NSFetchRequest<Category> = Category.fetchRequest()
-//
-//        do {
-//            categories = try context.fetch(request)
-//        } catch {
-//            print("Error loading categories \(error)")
-//
-            tableView.reloadData()
+
+        tableView.reloadData()
         }
     
-        
+ //MARK: - Delete Data From Swipe
+    
+override func updateModel(at indexPath: IndexPath) {
+    
+    if let categoryForDeletion = self.categories?[indexPath.row] {
+        do {
+            try self.realm.write {
+            self.realm.delete(categoryForDeletion)
+                    }
+                    } catch {
+                        print("Error deleting category \(error)")
+                    }
+                }
+}
+    
 //MARK: - Add New Categories
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -114,3 +124,5 @@ class CategoryTableViewController: UITableViewController {
     
 
 }
+
+
